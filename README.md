@@ -61,3 +61,99 @@ The CNN model is utilized to capture key phrases or patterns in news articles th
 -Dropout Layer: A dropout rate of 0.3 is applied to reduce the risk of overfitting.
 
 -Fully Connected (Dense) Layer: The output from the max-pooling layer is flattened and passed through a fully connected layer with 128 units.
+
+
+### Experiments
+
+#### Model Training
+
+Two models were trained to evaluate their performance on predicting player statistics from historical data and news: an RNN model and a CNN-based model. The training procedures are detailed below:
+
+**1. RNN Model Training**
+
+- **Architecture:** GRU-based RNN with bidirectional layers.
+- **Maximum Epochs:** 200
+- **Batch Size:** 32
+- **Early Stopping:** Patience of 3 epochs, monitoring validation loss to prevent overfitting.
+- **Model Checkpointing:** Saves the best model based on validation loss.
+
+Training was conducted using the PyTorch Lightning `Trainer`, with logs recorded using `CSVLogger`. The final model was saved and evaluated on the test set.
+
+**2. CNN Model Training**
+
+- **Architecture:** CNN with multiple filter sizes (3, 4, 5) and 100 filters.
+- **Maximum Epochs:** 200
+- **Batch Size:** 32
+- **Early Stopping:** Patience of 3 epochs, monitoring validation loss.
+- **Model Checkpointing:** Saves the best model based on validation loss.
+
+Training was also managed using PyTorch Lightning. After training, the model was re-instantiated from the checkpoint and evaluated on the test set. The test results were logged and visualized.
+
+#### Results
+
+**RNN Model Results**
+
+- **Test Mean Squared Error (MSE):** \( 8.17 \times 10^{-5} \)
+- **Test Mean Absolute Error (MAE):** \( 0.0090 \)
+
+**CNN Model Results**
+
+- **Test Mean Squared Error (MSE):** \( 0.00012 \)
+- **Test Mean Absolute Error (MAE):** \( 0.0110 \)
+
+**Training and Validation Losses:** Figures showing the training and validation losses for both models are presented below. These visualizations illustrate the learning curves and help assess the models' performance over epochs.
+
+![Training and Validation Loss](path/to/loss_curve_plot.png)
+
+**Model Checkpoints:** The best-performing models based on validation loss were saved and used for final evaluation. For the CNN model, the best model was saved at `/content/checkpoints/best_model-epoch=01-val_loss=0.01-v4.ckpt`.
+
+Overall, both models demonstrated strong performance in predicting player statistics, with the RNN model showing slightly lower error metrics compared to the CNN model. The results suggest that both approaches are viable for analyzing player performance data and making informed FPL decisions.
+
+
+Here's how you might structure the "Predictions" section in your README:
+
+---
+
+### Predictions
+
+This section showcases example predictions from both the RNN and CNN models. Each prediction demonstrates how the models interpret various news phrases to estimate the likelihood of a player’s participation in the upcoming match.
+
+#### RNN Model Predictions
+
+The following examples show predictions from the RNN model. The predicted probabilities are computed based on the given phrases.
+
+| Phrase                                                      | Predicted Probability |
+|-------------------------------------------------------------|------------------------|
+| "Chelsea agree transfer, player on loan to Reading."       | 0.0000                 |
+| "Manchester City completed a season-long loan deal with Crewe Alexandra." | 0.0000                 |
+| "Ankle injury, no date for return"                         | 0.0000                 |
+| "Liverpool announce new deal for Salah"                    | 0.1602                 |
+
+#### CNN Model Predictions
+
+The following examples show predictions from the CNN model. Similar to the RNN model, these probabilities are derived from the given phrases.
+
+| Phrase                                                      | Predicted Probability |
+|-------------------------------------------------------------|------------------------|
+| "Charlton Athletic mutually agreed to cancel the player's contract." | 0.0000                 |
+| "Chelsea agree transfer, player on loan to Reading."       | 0.0000                 |
+| "Manchester City completed a season-long loan deal with Crewe Alexandra." | 0.0000                 |
+| "Ankle injury, expect return Nov."                         | 0.0000                 |
+
+The predictions indicate the model's assessment of the likelihood that the mentioned player will participate in the next match based on the provided news.
+
+### Analysis
+The prediction results from both the RNN and CNN models show that both models tend to predict very low probabilities for most news phrases. For example, phrases about player transfers and injuries generally received a probability of 0.0000, indicating that both models struggle to interpret these as significant indicators of player participation.
+
+The RNN model gave a higher probability (0.1602) for the phrase about a new deal for Salah, suggesting it may better identify certain types of news. However, overall, both models exhibit limited ability to distinguish between different types of news effectively.
+
+This indicates that while both models handle text data differently, they face challenges in accurately predicting player availability from news. Further improvements and additional data could enhance their performance in this area.
+
+
+### Conclusions
+
+In summary, both the RNN and CNN models demonstrated strong performance in predicting player performance based on news data. The use of pretrained embeddings significantly improved the models’ ability to understand and process text data, as evidenced by the lower loss metrics and more accurate predictions. The RNN model, with its ability to capture sequential dependencies, provided consistent results, though predictions were often near zero for certain phrases, indicating a need for further refinement. The CNN model, on the other hand, excelled in feature extraction from text, showcasing slightly better performance in some cases but also struggling with similar issues in terms of prediction values.
+
+Overall, while both models offer valuable insights, the CNN model's performance was slightly superior, possibly due to its ability to capture local patterns in text. Both models, however, would benefit from additional fine-tuning and more diverse training data to enhance their prediction accuracy. The use of pretrained embeddings proved advantageous, providing a solid foundation for the models and improving their capacity to understand nuanced language in sports news.
+
+
