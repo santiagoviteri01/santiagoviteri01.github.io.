@@ -1,10 +1,10 @@
 ## Final Project NLP
 
 ## Introduction
-This project focuses on predicting the likelihood of player availability for football matches based on text news reports. We use Natural Language Processing (NLP) to analyze the news headlines and apply both RNN (LSTM) and CNN models to obtain the probability of the player being available. Both models are designed to extract relevant features from text and use them to predict player availability.
+This project focuses on predicting the likelihood of player availability for football matches based on text news reports. We use Natural Language Processing (NLP) to analyze the news headlines and apply both RNN (LSTM) and CNN models to obtain the probability of the available player. Both models are designed to extract relevant features from text and use them to predict player availability.
 
 ## Problem Statement
-In Fantasy Premier League (FPL), making informed decisions is key to success. While player statistics are valuable, real-time news on injuries, transfers, and team updates can significantly impact player performance. This project aims to analyze relevant news to provide FPL managers with actionable insights, helping them make better decisions on transfers, captain choices, and squad selection.
+In Fantasy Premier League (FPL), making informed decisions is key to success. While player statistics are valuable, real-time news on injuries, transfers, and team updates can significantly impact player performance. This project aims to analyze relevant news to provide FPL managers with actionable insights, helping them make better transfers, captain choices, and squad selection decisions.
 
 ## Dataset ##
 In this project, I used historical player statistics from the 2016-2017 to 2023-2024 seasons, which I obtained from Vaastav’s GitHub repository ([Vaastav's FPL Data Repository](https://github.com/vaastav/Fantasy-Premier-League)). The dataset contains various player attributes, such as goals scored, assists, and clean sheets. My main focus is on analyzing how news articles and the `chance_of_playing_this_round` variable can offer insights into a player's likelihood of starting in an upcoming match.
@@ -16,8 +16,6 @@ For the exploratory data analysis (EDA), I visualized the distribution of player
 ![Wordclouds](imagenes/wordclouds.png)
 
 
-
-
 To gain deeper insights, I followed up with histograms that display the frequency of the top 20 most common words within each category. These histograms helped identify key terms that are heavily associated with specific playing probabilities, offering a first insight of the text data.
 
 ![Histograms](imagenes/histogram1.png)
@@ -25,12 +23,12 @@ To gain deeper insights, I followed up with histograms that display the frequenc
 
 ## Dataprocess
 
-Once I got a first glance of the data, I processed the textual data in the following way:
+Once I got a first glance at the data, I processed the textual data in the following way:
 
 #### Tokenization and Vocabulary Building
 
 1. **Preprocessing and Tokenization:**
-   - I tokenized the news articles using the Natural Language Toolkit (NLTK). The tokenization process involved splitting each news article into words and filtering out numeric tokens (like scores or percentages). I also applied stemming to reduce words to their base forms, which helps in standardizing the text data.
+   - I tokenized the news articles using the Natural Language Toolkit (NLTK). The tokenization process involved splitting each news article into words and filtering out numeric tokens (like scores or percentages).
 
 2. **Creating the Vocabulary:**
    - I built a vocabulary from the training data, mapping each unique word to an integer index. This step is essential for converting the text into a format suitable for deep learning models. The vocabulary excludes numeric tokens and includes a special `<unk>` token to handle any words not seen during training.
@@ -54,7 +52,7 @@ The RNN model is designed to capture the temporal dependencies in text data from
 
 -Embedding Layer: Converts each word into dense vector representations of size 100 to capture semantic meaning.
 
--RNN Layers: The model includes two stacked RNN layers with 128 hidden units each, which processes the input sequentially. The recurrent layers capture temporal relationships between words in the news articles.
+-RNN Layers: The model includes two stacked RNN layers with 128 hidden units each, which process the input sequentially. The recurrent layers capture temporal relationships between words in the news articles.
 
 -Dropout Layer: Regularization is applied via a dropout layer with a dropout rate of 0.2 to prevent overfitting.
 
@@ -92,17 +90,17 @@ Two models were trained to evaluate their performance on predicting player stati
 - **Early Stopping:** Patience of 3 epochs, monitoring validation loss to prevent overfitting.
 - **Model Checkpointing:** Saves the best model based on validation loss.
 
-Training was conducted using the PyTorch Lightning `Trainer`, with logs recorded using `CSVLogger`. The final model was saved and evaluated on the test set.
+The training was conducted using the PyTorch Lightning `Trainer`, with logs recorded using `CSVLogger`. The final model was saved and evaluated on the test set.
 
 **2. CNN Model Training**
 
-- **Architecture:** CNN with multiple filter sizes (3,3,3) and 64 filters.
+- **Architecture:** CNN with multiple filter sizes (3,3,3) and 4 filters.
 - **Maximum Epochs:** 200
 - **Batch Size:** 32
 - **Early Stopping:** Patience of 3 epochs, monitoring validation loss.
 - **Model Checkpointing:** Saves the best model based on validation loss.
 
-Training was also managed using PyTorch Lightning. After training, the model was re-instantiated from the checkpoint and evaluated on the test set. The test results were logged and visualized.
+The training was also managed using PyTorch Lightning. After training, the model was re-instantiated from the checkpoint and evaluated on the test set. The test results were logged and visualized.
 
 #### Results
 
@@ -115,19 +113,14 @@ Training was also managed using PyTorch Lightning. After training, the model was
 **CNN Loss Curvas**
 ![Training and Validation Loss](imagenes/lcnn.png)
 **CNN Test Set Results**
-- **Test Mean Squared Error (MSE):** \( 0.00018 \)
-- **Test Mean Absolute Error (MAE):** \( 0.01375 \)
+- **Test Mean Squared Error (MSE):** \( 0.00007 \)
+- **Test Mean Absolute Error (MAE):** \( 0.00878 \)
 
 
 
 **Model Checkpoints:** The best-performing models based on validation loss were saved and used for final evaluation. For the CNN model, the best model was saved at `/content/checkpoints/best_model-epoch=01-val_loss=0.01-v4.ckpt`.
 
-Overall, both models demonstrated strong performance in predicting player statistics, with the RNN model showing slightly lower error metrics compared to the CNN model. The results suggest that both approaches are viable for analyzing player performance data and making informed FPL decisions.
-
-
-Here's how you might structure the "Predictions" section in your README:
-
----
+Overall, both models demonstrated strong performance in predicting player statistics, with the CNN model showing lower error metrics compared to the RNN model. The results suggest that both approaches are viable for analyzing player performance data and making informed FPL decisions.
 
 ### Predictions
 
@@ -139,9 +132,9 @@ The following examples show predictions from the RNN model. The predicted probab
 
 | Phrase                                                      | Predicted Probability |
 |-------------------------------------------------------------|------------------------|
-| "Chelsea agree transfer, player on loan to Reading."       | 0.0000                 |
-| "Manchester City completed a season-long loan deal with Crewe Alexandra." | 0.0000                 |
-| "Ankle injury, no date for return"                         | 0.0000                 |
+| "Chelsea agree transfer, player on loan to Reading."       | 0.9402                 |
+| "Manchester City completed a season-long loan deal with Crewe Alexandra." | 0.8708                 |
+| "Ankle injury operation is needed"                         | 0.0660                |
 | "Liverpool announce new deal for Salah"                    | 0.1602                 |
 
 #### CNN Model Predictions
@@ -150,25 +143,26 @@ The following examples show predictions from the CNN model. Similar to the RNN m
 
 | Phrase                                                      | Predicted Probability |
 |-------------------------------------------------------------|------------------------|
-| "Charlton Athletic mutually agreed to cancel the player's contract." | 0.0000                 |
-| "Chelsea agree transfer, player on loan to Reading."       | 0.0000                 |
-| "Manchester City completed a season-long loan deal with Crewe Alexandra." | 0.0000                 |
-| "Ankle injury, expect return Nov."                         | 0.0000                 |
+| "Chelsea agree transfer, player on loan to Reading." | 1.0000                 |
+| "Manchester City completed a season-long loan deal with Crewe Alexandra."      | 1.0000                 |
+| "Ankle injury operation is needed"| 0.0003                |
+| "Liverpool announce new deal for Salah"                         | 1.0000                 |
 
 The predictions indicate the model's assessment of the likelihood that the mentioned player will participate in the next match based on the provided news.
 
 ### Analysis
-The prediction results from both the RNN and CNN models show that both models tend to predict very low probabilities for most news phrases. For example, phrases about player transfers and injuries generally received a probability of 0.0000, indicating that both models struggle to interpret these as significant indicators of player participation.
-
-The RNN model gave a higher probability (0.1602) for the phrase about a new deal for Salah, suggesting it may better identify certain types of news. However, overall, both models exhibit limited ability to distinguish between different types of news effectively.
-
-This indicates that while both models handle text data differently, they face challenges in accurately predicting player availability from news. Further improvements and additional data could enhance their performance in this area.
-
+The prediction results from both the RNN and CNN models show that both models tend to predict very low probabilities for most phrases. For example, news about player transfers and injuries generally received a probability of 0.0000, indicating that both models interpret these as significant indicators of player participation.
 
 ### Conclusions
 
-In summary, both the RNN and CNN models demonstrated strong performance in predicting player performance based on news data. The use of pretrained embeddings significantly improved the models’ ability to understand and process text data, as evidenced by the lower loss metrics and more accurate predictions. The RNN model, with its ability to capture sequential dependencies, provided consistent results, though predictions were often near zero for certain phrases, indicating a need for further refinement. The CNN model, on the other hand, excelled in feature extraction from text, showcasing slightly better performance in some cases but also struggling with similar issues in terms of prediction values.
+In summary, the RNN and CNN models both showed strong performance in predicting player statistics from news data, with the CNN model achieving lower error metrics compared to the LSTM model. The use of pretrained embeddings played a crucial role in improving model performance by enhancing their ability to understand and process text data. Both models would benefit from additional fine-tuning and a more diverse dataset to further improve prediction accuracy. Overall, these findings suggest that both RNN-LSTM and CNN models are valuable tools for analyzing player performance data and making informed FPL decisions, with each model offering advantages that could be applied on future analysis. 
 
-Overall, while both models offer valuable insights, the CNN model's performance was slightly superior, possibly due to its ability to capture local patterns in text. Both models, however, would benefit from additional fine-tuning and more diverse training data to enhance their prediction accuracy. The use of pretrained embeddings proved advantageous, providing a solid foundation for the models and improving their capacity to understand nuanced language in sports news.
+
+
+
+
+
+
+
 
 
