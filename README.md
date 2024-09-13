@@ -83,7 +83,7 @@ Training was conducted using the PyTorch Lightning `Trainer`, with logs recorded
 
 **2. CNN Model Training**
 
-- **Architecture:** CNN with multiple filter sizes (3, 4, 5) and 100 filters.
+- **Architecture:** CNN with multiple filter sizes (3,3,3) and 64 filters.
 - **Maximum Epochs:** 200
 - **Batch Size:** 32
 - **Early Stopping:** Patience of 3 epochs, monitoring validation loss.
@@ -95,17 +95,17 @@ Training was also managed using PyTorch Lightning. After training, the model was
 
 **RNN Model Results**
 
-- **Test Mean Squared Error (MSE):** \( 8.17 \times 10^{-5} \)
-- **Test Mean Absolute Error (MAE):** \( 0.0090 \)
+- **Test Mean Squared Error (MSE):** \(0.00012 \)
+- **Test Mean Absolute Error (MAE):** \( 0.01122 \)
 
 **CNN Model Results**
 
-- **Test Mean Squared Error (MSE):** \( 0.00012 \)
-- **Test Mean Absolute Error (MAE):** \( 0.0110 \)
+- **Test Mean Squared Error (MSE):** \( 0.00018 \)
+- **Test Mean Absolute Error (MAE):** \( 0.01375 \)
 
 **Training and Validation Losses:** Figures showing the training and validation losses for both models are presented below. These visualizations illustrate the learning curves and help assess the models' performance over epochs.
 
-![Training and Validation Loss](path/to/loss_curve_plot.png)
+![Training and Validation Loss](imagenes/lrnn.png)
 
 **Model Checkpoints:** The best-performing models based on validation loss were saved and used for final evaluation. For the CNN model, the best model was saved at `/content/checkpoints/best_model-epoch=01-val_loss=0.01-v4.ckpt`.
 
