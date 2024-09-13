@@ -93,20 +93,19 @@ Training was also managed using PyTorch Lightning. After training, the model was
 
 #### Results
 
-**RNN Model Results**
-
+**RNN Loss Curves**
+![Training and Validation Loss](imagenes/lrnn.png)
+**RNN Test Set Results**
 - **Test Mean Squared Error (MSE):** \(0.00012 \)
 - **Test Mean Absolute Error (MAE):** \( 0.01122 \)
 
-**CNN Model Results**
-
+**CNN Loss Curvas**
+![Training and Validation Loss](imagenes/lcnn.png)
+**CNN Test Set Results**
 - **Test Mean Squared Error (MSE):** \( 0.00018 \)
 - **Test Mean Absolute Error (MAE):** \( 0.01375 \)
 
-**Training and Validation Losses:** Figures showing the training and validation losses for both models are presented below. These visualizations illustrate the learning curves and help assess the models' performance over epochs.
 
-![Training and Validation Loss](imagenes/lrnn.png)
-![Training and Validation Loss](imagenes/lcnn.png)
 
 **Model Checkpoints:** The best-performing models based on validation loss were saved and used for final evaluation. For the CNN model, the best model was saved at `/content/checkpoints/best_model-epoch=01-val_loss=0.01-v4.ckpt`.
 
