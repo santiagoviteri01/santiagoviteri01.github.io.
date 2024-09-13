@@ -9,8 +9,8 @@ In Fantasy Premier League (FPL), making informed decisions is key to success. Wh
 ## EDA ##
 
 For the exploratory data analysis (EDA), I visualized the distribution of player-related news based on their reported "chance of playing this round." First, I generated word clouds for different percentages of playing chances to highlight the most common words associated with each probability. This provided a quick and intuitive overview of the recurring words in the dataset.
-![Wordclouds](imagenes/wordclouds2.png)
 ![Wordclouds](imagenes/wordclouds1.png)
+![Wordclouds](imagenes/wordclouds.png)
 
 
 
