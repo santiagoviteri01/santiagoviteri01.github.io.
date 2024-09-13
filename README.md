@@ -6,6 +6,9 @@ This project focuses on predicting the likelihood of player availability for foo
 ## Problem Statement
 In Fantasy Premier League (FPL), making informed decisions is key to success. While player statistics are valuable, real-time news on injuries, transfers, and team updates can significantly impact player performance. This project aims to analyze relevant news to provide FPL managers with actionable insights, helping them make better decisions on transfers, captain choices, and squad selection.
 
+## Dataset ##
+In this project, I used historical player statistics from the 2016-2017 to 2023-2024 seasons, which I obtained from Vaastav’s GitHub repository ([Vaastav's FPL Data Repository](https://github.com/vaastav/Fantasy-Premier-League)). The dataset contains various player attributes, such as goals scored, assists, and clean sheets. My main focus is on analyzing how news articles and the `chance_of_playing_this_round` variable can offer insights into a player's likelihood of starting in an upcoming match.
+
 ## EDA ##
 
 For the exploratory data analysis (EDA), I visualized the distribution of player-related news based on their reported "chance of playing this round." First, I generated word clouds for different percentages of playing chances to highlight the most common words associated with each probability. This provided a quick and intuitive overview of the recurring words in the dataset.
@@ -20,11 +23,9 @@ To gain deeper insights, I followed up with histograms that display the frequenc
 ![Histograms](imagenes/histogram1.png)
 ![Histograms](imagenes/histogram2.png)
 
-##  Dataset and Dataprocess
+## Dataprocess
 
-In this project, I used historical player statistics from the 2016-2017 to 2023-2024 seasons, which I obtained from Vaastav’s GitHub repository ([Vaastav's FPL Data Repository](https://github.com/vaastav/Fantasy-Premier-League)). The dataset contains various player attributes, such as goals scored, assists, and clean sheets. My main focus is on analyzing how news articles and the `chance_of_playing_this_round` variable can offer insights into a player's likelihood of starting in an upcoming match.
-
-Here’s how I processed the textual data:
+Once I got a first glance of the data, I processed the textual data in the following way:
 
 #### Tokenization and Vocabulary Building
 
