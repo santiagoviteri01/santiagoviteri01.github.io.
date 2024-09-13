@@ -157,10 +157,11 @@ The prediction results from both the RNN and CNN models show that both models te
 
 In summary, the RNN and CNN models both showed strong performance in predicting player statistics from news data, with the CNN model achieving lower error metrics compared to the LSTM model. The use of pretrained embeddings played a crucial role in improving model performance by enhancing their ability to understand and process text data. Both models would benefit from additional fine-tuning and a more diverse dataset to further improve prediction accuracy. Overall, these findings suggest that both RNN-LSTM and CNN models are valuable tools for analyzing player performance data and making informed FPL decisions, with each model offering advantages that could be applied on future analysis. 
 
+### References
 
-
-
-
+- V. Anand, ''Fantasy-Premier-League,'' github.com. Available: \url{https://github.com/vaastav/Fantasy-Premier-League}. 
+- Mahadevaswamy, U. B., & Swathi, P. (2022). Sentiment analysis using bidirectional LSTM network. Procedia Computer Science, 218, 2866-2872. https://doi.org/10.1016/j.procs.2022.12.400
+-Ramdas, Delano. (2022). Using Convolution Neural Networks to Predict the Performance of Footballers in the Fantasy Premier League. 10.13140/RG.2.2.10010.72645/2. 
 
 
 
