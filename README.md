@@ -161,7 +161,8 @@ In summary, the RNN and CNN models both showed strong performance in predicting 
 
 - V. Anand, ''Fantasy-Premier-League,'' github.com. Available: \url{https://github.com/vaastav/Fantasy-Premier-League}. 
 - Mahadevaswamy, U. B., & Swathi, P. (2022). Sentiment analysis using bidirectional LSTM network. Procedia Computer Science, 218, 2866-2872. https://doi.org/10.1016/j.procs.2022.12.400
--Ramdas, Delano. (2022). Using Convolution Neural Networks to Predict the Performance of Footballers in the Fantasy Premier League. 10.13140/RG.2.2.10010.72645/2. 
+  
+- Ramdas, Delano. (2022). Using Convolution Neural Networks to Predict the Performance of Footballers in the Fantasy Premier League. 10.13140/RG.2.2.10010.72645/2. 
 
 
 
