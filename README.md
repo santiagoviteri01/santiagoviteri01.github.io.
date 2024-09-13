@@ -17,7 +17,8 @@ For the exploratory data analysis (EDA), I visualized the distribution of player
 
 To gain deeper insights, I followed up with histograms that display the frequency of the top 20 most common words within each category. These histograms helped identify key terms that are heavily associated with specific playing probabilities, offering a first insight of the text data.
 
-
+![Wordclouds](imagenes/histograms1.png)
+![Wordclouds](imagenes/histograms2.png)
 
 ##  Dataset and Dataprocess
 
