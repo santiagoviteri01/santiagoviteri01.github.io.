@@ -6,6 +6,17 @@ This project focuses on predicting the likelihood of player availability for foo
 ## Problem Statement
 In Fantasy Premier League (FPL), making informed decisions is key to success. While player statistics are valuable, real-time news on injuries, transfers, and team updates can significantly impact player performance. This project aims to analyze relevant news to provide FPL managers with actionable insights, helping them make better decisions on transfers, captain choices, and squad selection.
 
+## EDA ##
+
+For the exploratory data analysis (EDA), I visualized the distribution of player-related news based on their reported "chance of playing this round." First, I generated word clouds for different percentages of playing chances to highlight the most common words associated with each probability. This provided a quick and intuitive overview of the recurring words in the dataset.
+![Wordclouds](imagenes/wordclouds2.png)
+![Wordclouds](imagenes/wordclouds1.png)
+
+
+
+
+To gain deeper insights, I followed up with histograms that display the frequency of the top 20 most common words within each category. These histograms helped identify key terms that are heavily associated with specific playing probabilities, offering a first insight of the text data.
+
 
 
 ##  Dataset and Dataprocess
