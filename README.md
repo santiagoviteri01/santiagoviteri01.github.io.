@@ -45,16 +45,14 @@ I then split the dataset into training, validation, and test sets using an 80/10
 By transforming the news data into tokenized sequences and using embeddings, I aim to extract useful information that can indicate whether players are likely to start in upcoming matches. This approach is designed to help FPL managers make more informed decisions.
 
 ## Model Architectures
-### RNN Model
-The RNN model is designed to capture the temporal dependencies in text data from news articles that impact FPL player performance and decision-making. It helps understand how sequential context in the text (like match updates or injury reports) can influence FPL strategies.
+### LSTM-RNN Model
+The LSTM-RNN model is designed to capture the temporal dependencies in text data from news articles that impact FPL player performance and decision-making. It helps understand how sequential context in the text (like match updates or injury reports) can influence FPL strategies.
 
 -Input Layer: Tokenized and preprocessed text sequences representing news articles or reports are input into the model.
 
 -Embedding Layer: Converts each word into dense vector representations of size 100 to capture semantic meaning.
 
 -RNN Layers: The model includes two stacked RNN layers with 128 hidden units each, which process the input sequentially. The recurrent layers capture temporal relationships between words in the news articles.
-
--Dropout Layer: Regularization is applied via a dropout layer with a dropout rate of 0.2 to prevent overfitting.
 
 -Fully Connected (Dense) Layer: The output from the RNN layers is passed through a fully connected layer with a linear activation function.
 
@@ -63,17 +61,14 @@ The CNN model is utilized to capture key phrases or patterns in news articles th
 
 -Input Layer: Preprocessed news article text, converted into sequences of word embeddings, serves as the input.
 
--Convolutional Layers:
-
-1. First Convolutional Layer: A 1D convolutional layer with 64 filters and a kernel size of 3 is applied to extract meaningful n-gram features from the text.
-
-2. Second Convolutional Layer: Another 1D convolutional layer with 128 filters and the same kernel size refines the feature extraction, capturing more complex patterns in the text.
-
--Max-Pooling Layer: Following the convolutional layers, a max-pooling layer with a pool size of 2 reduces the dimensionality of the feature maps, summarizing the key information.
-
--Dropout Layer: A dropout rate of 0.3 is applied to reduce the risk of overfitting.
-
--Fully Connected (Dense) Layer: The output from the max-pooling layer is flattened and passed through a fully connected layer with 128 units.
+- The model contains multiple convolutional layers, each with the same filter size (filter_sizes==3). The convolution is applied with:
+1)Input Channels: 1 (text is treated as a 1-channel image).
+2) Output Channels: num_filters (number of feature maps).
+3) Kernel Size: (filter_size, embed_dim) where filter_size is the same value for each convolutional layer. 
+4) After convolution, the outputs are passed through a ReLU activation function.
+-Max-Pooling Layer: After each convolutional layer, max pooling is applied over the dimension (sequence length). This reduces the dimensionality and selects the most important features (the most prominent feature per filter for the sequence).
+- Concatenation: The outputs from each convolutional layer are pooled and then concatenated along the feature dimension to combine the features from all filter sizes into a single vector.
+-Fully Connected (Dense) Layer:The concatenated vector is passed through a fully connected layer (self.fc), which maps the extracted features to the output dimension (output_dim), typically corresponding to the number of classes in classification or a single value in regression.
 
 
 ### Experiments
@@ -84,7 +79,7 @@ Two models were trained to evaluate their performance on predicting player stati
 
 **1. RNN Model Training**
 
-- **Architecture:** GRU-based RNN with bidirectional layers.
+- **Architecture:** LSTM-based RNN with bidirectional layers.
 - **Maximum Epochs:** 200
 - **Batch Size:** 32
 - **Early Stopping:** Patience of 3 epochs, monitoring validation loss to prevent overfitting.
@@ -126,7 +121,7 @@ Overall, both models demonstrated strong performance in predicting player statis
 
 This section showcases example predictions from both the RNN and CNN models. Each prediction demonstrates how the models interpret various news phrases to estimate the likelihood of a player’s participation in the upcoming match.
 
-#### RNN Model Predictions
+#### LSTM-RNN Model Predictions
 
 The following examples show predictions from the RNN model. The predicted probabilities are computed based on the given phrases.
 
