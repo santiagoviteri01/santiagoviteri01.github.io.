@@ -59,16 +59,16 @@ The LSTM-RNN model is designed to capture the temporal dependencies in text data
 ### CNN Model
 The CNN model is utilized to capture key phrases or patterns in news articles that are important for making FPL decisions. It is particularly useful for extracting non-sequential, spatial patterns in the text, such as keywords (e.g., “injury”, “suspension”) that may indicate significant changes in player status.
 
--Input Layer: Preprocessed news article text, converted into sequences of word embeddings, serves as the input.
+- Input Layer: Preprocessed news article text, converted into sequences of word embeddings, serves as the input.
 
 - The model contains multiple convolutional layers, each with the same filter size (filter_sizes==3). The convolution is applied with:
    1) Input Channels: 1 (text is treated as a 1-channel image).
    2) Output Channels: num_filters (number of feature maps).
    3) Kernel Size: (filter_size, embed_dim) where filter_size is the same value for each convolutional layer. 
    4) After convolution, the outputs are passed through a ReLU activation function.
--Max-Pooling Layer: After each convolutional layer, max pooling is applied over the dimension (sequence length). This reduces the dimensionality and selects the most important features (the most prominent feature per filter for the sequence).
+- Max-Pooling Layer: After each convolutional layer, max pooling is applied over the dimension (sequence length). This reduces the dimensionality and selects the most important features (the most prominent feature per filter for the sequence).
 - Concatenation: The outputs from each convolutional layer are pooled and then concatenated along the feature dimension to combine the features from all filter sizes into a single vector.
--Fully Connected (Dense) Layer:The concatenated vector is passed through a fully connected layer (self.fc), which maps the extracted features to the output dimension (output_dim), typically corresponding to the number of classes in classification or a single value in regression.
+- Fully Connected (Dense) Layer:The concatenated vector is passed through a fully connected layer (self.fc), which maps the extracted features to the output dimension (output_dim), typically corresponding to the number of classes in classification or a single value in regression.
 
 
 ### Experiments
